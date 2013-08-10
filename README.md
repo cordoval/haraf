@@ -12,8 +12,7 @@ Goals
 Milestones
 ==========
 
-1. execute PHPUnit tests using PHPspec's formatters (event mapping between the two)
-2. combined execution of PHPSpec + PHPUnit
-3. add Behat execution to the list
-
-
+1. dogfooding the specs using the haraf executable
+2. execute PHPUnit tests using PHPspec's formatters (event mapping between the two)
+3. combined execution of PHPSpec + PHPUnit
+4. add Behat execution to the list
