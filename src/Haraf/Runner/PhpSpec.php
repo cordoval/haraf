@@ -1,36 +1,29 @@
 <?php
 
 namespace Haraf\Runner;
-
-use PhpSpec\Console\Application;
-
-use Symfony\Component\Console\Input\ArgvInput as Input,
-    Symfony\Component\Console\Output\NullOutput as Output,
-    Symfony\Component\Console\Helper\HelperSet as Helpers;
+    
+use Haraf\Environment\PhpSpec as Environment;
     
 class PhpSpec
 {
-    private $application;
     
-    public function __construct(Application $application)
-    {
-        $this->application = $application;
-    }
+    private $environment;
 
+    public function __construct(Environment $environment)
+    {
+        $this->environment = $environment;
+    }
+    
     public function run()
     {
-        $container = $this->application->getContainer();
-        $container->set('console.input', new Input());
-        $container->set('console.output', new Output());
-        $container->set('console.helpers', new Helpers());
-        $container->configure();
+        $this->environment->configure();
         
-        $specRunner = $container->get('runner.specification');
-        $loader = $container->get('loader.resource_loader');
-        $specs = $loader->load(null)->getSpecifications();
+        $runner = $this->environment->getRunner();
+        $specs = $this->environment->getSpecifications();
         
         foreach ($specs as $spec) {
-            $specRunner->run($spec);
+            $runner->run($spec);
         }
     }
+   
 }

@@ -2,7 +2,8 @@
 
 namespace Haraf\Console\Command;
 
-use Haraf\Runner\PhpSpec as Runner;
+use Haraf\Runner\PhpSpec as Runner,
+    Haraf\Environment\PhpSpec as Environment;
 
 use Symfony\Component\Console\Command\Command as BaseCommand,
     Symfony\Component\Console\Input\InputInterface,
@@ -19,7 +20,7 @@ class RunCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $runner = new Runner(new PhpSpecApplication(2.0));
+        $runner = new Runner(new Environment(new PhpSpecApplication(null)));
         $runner->run();
     }
 }
