@@ -20,14 +20,13 @@ class PhpSpec
     public function run()
     {
         $container = $this->application->getContainer();
-        
         $container->set('console.input', new Input());
         $container->set('console.output', new Output());
         $container->set('console.helpers', new Helpers());
+        $container->configure();
         
-        $loader = $container->get('loader.resource_loader');
         $specRunner = $container->get('runner.specification');
-        
+        $loader = $container->get('loader.resource_loader');
         $specs = $loader->load(null)->getSpecifications();
         
         foreach ($specs as $spec) {

@@ -26,10 +26,8 @@ class PhpSpecSpec extends ObjectBehavior
         
         $container->get('loader.resource_loader')->willReturn($loader);
         $container->get('runner.specification')->willReturn($runner);
-        
-        $container->set('console.input', Argument::any())->willReturn(null);
-        $container->set('console.output', Argument::any())->willReturn(null);
-        $container->set('console.helpers', Argument::any())->willReturn(null);
+        $container->set(Argument::any(), Argument::any())->willReturn(null);
+        $container->configure()->willReturn(null);
         
         $loader->load(null)->willReturn($suite);
         $suite->getSpecifications()->willReturn([$spec]);
@@ -37,7 +35,7 @@ class PhpSpecSpec extends ObjectBehavior
         $this->beConstructedWith($application);
     }
     
-    function it_gets_container_from_phpspec_application_and_gets_components_it_needs($application, $container)
+    function it_configures_container_from_phpspec_application_and_gets_components_it_needs($application, $container)
     {
         $this->run();
         
@@ -45,6 +43,8 @@ class PhpSpecSpec extends ObjectBehavior
         
         $container->get('loader.resource_loader')->shouldHaveBeenCalled();
         $container->get('runner.specification')->shouldHaveBeenCalled();
+        
+        $container->configure()->shouldHaveBeenCalled();
     }
     
     function it_configures_console_inputs_and_outputs_in_the_container($container)
