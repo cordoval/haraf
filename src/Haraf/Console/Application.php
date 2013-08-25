@@ -6,6 +6,9 @@ use Symfony\Component\Console\Application as BaseApplication;
 
 use Haraf\Console\Command\RunCommand;
 
+/**
+* Main application
+*/
 class Application extends BaseApplication
 {
     

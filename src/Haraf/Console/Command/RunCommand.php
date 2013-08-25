@@ -11,6 +11,9 @@ use Symfony\Component\Console\Command\Command as BaseCommand,
 
 use PhpSpec\Console\Application as PhpSpecApplication;
 
+/**
+* Finds and runs any configured specs/tests
+*/
 class RunCommand extends BaseCommand
 {
     public function __construct()
